@@ -1,0 +1,37 @@
+import { useRouter } from "expo-router";
+import { Text, View } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
+import Ionicons from "@expo/vector-icons/Ionicons";
+
+import { ArrowBack } from "@/components/arrow-back";
+import { PincodeForm } from "@/components/pincode-form";
+
+const pinLength = 5;
+
+export default function CreatePinScreen() {
+  const router = useRouter();
+
+  return (
+    <SafeAreaView className="flex-1 py-3 bg-white">
+      <View className="flex-row justify-between relative">
+        <ArrowBack className="absolute left-14 top-3" />
+        <View className="rounded-full bg-brand-green-100 size-12 border border-brand-green-200 flex justify-center items-center">
+          <Ionicons name="phone-portrait-outline" size={24} color="#00A385" />
+        </View>
+        <View />
+      </View>
+      <Text className="text-center my-2 text-[15px] font-medium">
+        Create a Pin code
+      </Text>
+      <Text className="text-center my-6 text-[15px] text-brand-gray-500">
+        enter 5 digit code:
+      </Text>
+      <PincodeForm
+        handleSubmit={(code) =>
+          code.length === pinLength && router.push("/(auth)/repeat-pin")
+        }
+        pinLength={pinLength}
+      />
+    </SafeAreaView>
+  );
+}
