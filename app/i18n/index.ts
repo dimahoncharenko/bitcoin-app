@@ -223,8 +223,15 @@ const resources = {
   },
 };
 
+const allowedLocales = ["en-US", "ar-SA"];
+const getLocale = (locale: string) => {
+  if (!allowedLocales.includes(locale)) {
+    return "en-US";
+  } else return locale;
+};
+
 const initI18n = async () => {
-  let savedLanguage = (await AsyncStorage.getItem("language")) || "en-US";
+  let savedLanguage = await AsyncStorage.getItem("language");
 
   if (!savedLanguage) {
     savedLanguage = Localization.locale;
@@ -233,7 +240,7 @@ const initI18n = async () => {
   i18n.use(initReactI18next).init({
     compatibilityJSON: "v4",
     resources,
-    lng: savedLanguage,
+    lng: getLocale(savedLanguage),
     fallbackLng: "pt-BR",
     interpolation: {
       escapeValue: false,
