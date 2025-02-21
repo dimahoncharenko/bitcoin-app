@@ -23,6 +23,12 @@ export default function () {
         }}
       />
       <Stack.Screen
+        name="repeat-pin"
+        options={{
+          headerShown: false,
+        }}
+      />
+      <Stack.Screen
         name="index"
         options={{
           headerShown: false,

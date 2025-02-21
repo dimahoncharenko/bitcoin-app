@@ -20,7 +20,6 @@ export const useCurrentUser = () => {
           withCredentials: true,
         });
 
-        console.log("USER: ", res.data);
         setUser(res.data);
       } catch (err) {
         console.error(err);

@@ -1,18 +1,16 @@
 import * as yup from "yup";
+import i18n from "../../../app/i18n";
 
 export const signUpValidationSchema = yup
   .object({
-    username: yup
-      .string()
-      .min(2, "Username should be at least 2 characters long")
-      .required("Username is required"),
+    username: yup.string().min(2, i18n.t("signUp.fields.nameError")).required(),
     email: yup
       .string()
-      .email("Email is not correct")
-      .required("Please enter your email address"),
+      .email(i18n.t("signUp.fields.invalidEmail"))
+      .required(i18n.t("signUp.fields.emptyEmail")),
     password: yup
       .string()
-      .min(6, "Password must be at least 6 characters long")
+      .min(6, i18n.t("signUp.fields.passwordError"))
       .required(),
   })
   .required();

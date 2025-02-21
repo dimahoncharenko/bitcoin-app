@@ -5,6 +5,7 @@ import { BrandButton } from "@/components/brand-button";
 import { PinInput } from "@/components/pin-input";
 import { Keys, isClearTyped, isCodeFull } from "../lib/utils";
 import { Key } from "./key";
+import { useTranslation } from "react-i18next";
 
 type Props = {
   pinLength?: number;
@@ -19,6 +20,8 @@ export const PincodeForm = ({
   code,
   setCode,
 }: Props) => {
+  const { t } = useTranslation();
+
   const handleChangePin = (key: Keys) => {
     if (isCodeFull(code, key, pinLength)) return;
     if (isClearTyped(key)) {
@@ -68,7 +71,7 @@ export const PincodeForm = ({
           handleSubmit(code);
         }}
       >
-        Continue
+        {t("shared.submit")}
       </BrandButton>
     </>
   );

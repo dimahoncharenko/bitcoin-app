@@ -2,9 +2,11 @@ import { Text } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 
 import { useCurrentUser } from "@/shared/hooks/useCurrentUser";
+import { useTranslation } from "react-i18next";
 
 export const HeroSection = () => {
   const { user } = useCurrentUser();
+  const { t } = useTranslation();
 
   return (
     <LinearGradient
@@ -18,9 +20,11 @@ export const HeroSection = () => {
       ]}
       className="h-full justify-center items-center max-h-[296px] -mt-14 py-12 border-2 border-[rgba(250,138,52,.6)] rounded-b-3xl overflow-hidden"
     >
-      <Text className="text-[13px]/[16px] text-white">Your name</Text>
+      <Text className="text-[13px]/[16px] text-white">
+        {t("home.username")}
+      </Text>
       <Text className="text-[28px]/[32px] mt-2 font-bold text-white">
-        {user?.name || "John Doe"}
+        {user?.name || t("home.usernameFallback")}
       </Text>
     </LinearGradient>
   );

@@ -17,6 +17,8 @@ import {
 } from "@/shared/lib/login/utils";
 import { tokenService } from "@/shared/lib/token/utils";
 import { checkIsTherePin } from "@/shared/lib/pin/utils";
+import { useTranslation } from "react-i18next";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 type FormValues = {
   email: string;
@@ -25,6 +27,7 @@ type FormValues = {
 
 export default function LoginScreen() {
   const router = useRouter();
+  const { t } = useTranslation();
 
   const {
     control,
@@ -45,6 +48,8 @@ export default function LoginScreen() {
       tokenService.saveToken(res.accessToken);
       const isTherePin = await checkIsTherePin();
 
+      AsyncStorage.setItem("user-email", values.email);
+
       router.push(isTherePin ? "/(app)" : "/confirm-pin");
     } catch (err) {
       const isUsernameCorrect = checkUsername(values.email);
@@ -61,7 +66,6 @@ export default function LoginScreen() {
     <SafeAreaView className="relative flex-1">
       <View className="h-1/6 flex justify-center">
         <ArrowBack />
-        <Link href="/(app)/profile">Profile</Link>
       </View>
       <Image
         className="absolute top-0 -z-10"
@@ -74,10 +78,10 @@ export default function LoginScreen() {
           </View>
           <View>
             <Text className="text-brand-black text-[15px] font-semibold">
-              Login
+              {t("signIn.header")}
             </Text>
             <Text className="text-[15px] text-brand-gray-500">
-              Personal Account
+              {t("signIn.account")}
             </Text>
           </View>
         </View>
@@ -91,11 +95,11 @@ export default function LoginScreen() {
             render={({ field: { onChange, onBlur, value } }) => (
               <View className="py-6 px-4 relative">
                 <Text className="mb-2 ml-4 text-[15px] text-brand-gray-500">
-                  E-mail
+                  {t("signIn.fields.email")}
                 </Text>
                 <TextInput
                   className="border rounded-2xl h-14 px-4 text-brand-black text-[15px]/[1rem] border-brand-gray-300"
-                  placeholder="johndoe@gmail.com"
+                  placeholder={t("signIn.fields.emailPlaceholder")}
                   onBlur={onBlur}
                   onChangeText={onChange}
                   value={value}
@@ -122,12 +126,12 @@ export default function LoginScreen() {
               <View className="px-4 relative">
                 <View className="flex-row justify-between mx-4">
                   <Text className="mb-2 text-[15px] text-brand-gray-500">
-                    Password
+                    {t("signIn.fields.password")}
                   </Text>
                   {errors.password && (
                     <TouchableOpacity>
                       <Text className="text-brand-orange-400 text-[15px]">
-                        Forgot?
+                        {t("signIn.forgot")}
                       </Text>
                     </TouchableOpacity>
                   )}
@@ -157,14 +161,14 @@ export default function LoginScreen() {
           className="bg-brand-orange-400 mx-4 py-1 rounded-2xl mt-8"
         >
           <Text className="text-center text-white text-[15px] font-semibold py-3">
-            Continue
+            {t("shared.submit")}
           </Text>
         </TouchableOpacity>
         <Link
           href="/(auth)/sign-up"
           className="text-brand-orange-400 mt-4 text-center text-[15px] font-medium"
         >
-          Create Account
+          {t("signIn.noAccount")}
         </Link>
       </View>
     </SafeAreaView>

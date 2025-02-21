@@ -7,8 +7,11 @@ import { useForm } from "react-hook-form";
 import { useCallback } from "react";
 import { Post } from "@/shared/lib/posts/utils";
 import { Filter } from "@/components/filter";
+import { useTranslation } from "react-i18next";
 
 export const PostsNamesList = () => {
+  const { t } = useTranslation();
+
   const { control, watch } = useForm({
     defaultValues: {
       search: "",
@@ -37,16 +40,16 @@ export const PostsNamesList = () => {
     <>
       <SearchField control={control} />
 
-      <View className="gap-2">
+      <View className="gap-2 mt-4">
         <Filter data={posts} criteria={criteria}>
           {(filtered) =>
             filtered.map((post) => (
               <View key={post.id} className="bg-white px-4 py-6 rounded-2xl">
                 <Text className="text-[15px]/[24px] text-brand-black font-medium">
-                  ID: {post.id}
+                  {t("search.id")} {post.id}
                 </Text>
                 <Text className="text-brand-gray-550 text-[13px]/[16px]">
-                  Name: {post.title}
+                  {t("search.name")} {post.title}
                 </Text>
               </View>
             ))

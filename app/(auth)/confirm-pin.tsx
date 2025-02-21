@@ -2,6 +2,7 @@ import { Text, TouchableOpacity, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { useRouter } from "expo-router";
+import AntDesign from "@expo/vector-icons/AntDesign";
 import { useEffect, useRef, useState } from "react";
 import { useNavigation } from "@react-navigation/native";
 import SimpleLineIcons from "@expo/vector-icons/SimpleLineIcons";
@@ -9,22 +10,27 @@ import { PincodeForm } from "@/components/pincode-form";
 import { useBiometricAuth } from "@/shared/hooks/useBiometricAuth";
 import { pinService } from "@/shared/lib/pin/utils";
 import { Alert } from "@/components/alert";
-import { tokenService } from "@/shared/lib/token/utils";
+import { checkIfAuthorized, tokenService } from "@/shared/lib/token/utils";
+import { useTranslation } from "react-i18next";
+import { useCurrentUser } from "@/shared/hooks/useCurrentUser";
 
 const pinLength = 5;
 
 export default function ConfirmPinScreen() {
+  const { t } = useTranslation();
   const [pin, setPin] = useState("");
   const allowedToLeave = useRef(false);
+  const { user } = useCurrentUser();
 
   const router = useRouter();
   const navigation = useNavigation();
   const { handleBiometricAuth } = useBiometricAuth();
 
   useEffect(() => {
-    const unsubscribe = navigation.addListener("beforeRemove", (e) => {
-      // Only prevent navigation if not explicitly allowed
-      if (!allowedToLeave.current && pin.length < pinLength) {
+    const unsubscribe = navigation.addListener("beforeRemove", async (e) => {
+      const isAuthorized = await checkIfAuthorized();
+
+      if (!allowedToLeave.current && isAuthorized && pin.length < pinLength) {
         e.preventDefault();
       }
     });
@@ -32,16 +38,28 @@ export default function ConfirmPinScreen() {
     return () => unsubscribe();
   }, [navigation, pin]);
 
+  const letUserGo = () => {
+    allowedToLeave.current = true;
+    router.back();
+  };
+
+  const displayPinError = () => {
+    setPin("");
+    Alert({
+      title: t("submitPin.errorHead"),
+      errorMsg: t("submitPin.errorBody"),
+      text: "",
+    });
+  };
+
   const handlePinSubmit = async (code: string) => {
     const candidate = await pinService.getPin();
     const validated = code === candidate;
 
     if (validated) {
-      allowedToLeave.current = true;
-      router.back();
+      letUserGo();
     } else {
-      setPin("");
-      Alert({ title: "Invalid PIN", errorMsg: "Please try again.", text: "" });
+      displayPinError();
     }
   };
 
@@ -64,8 +82,8 @@ export default function ConfirmPinScreen() {
         >
           <SimpleLineIcons name="logout" size={24} color="black" />
         </TouchableOpacity>
-        <View className="rounded-full bg-brand-green-100 size-12 border border-brand-green-200 flex justify-center items-center">
-          <Ionicons name="phone-portrait-outline" size={24} color="#00A385" />
+        <View className="rounded-full bg-brand-green-100 size-12 border border-brand-green-200 flex justify-center items-center mt-3">
+          <AntDesign name="user" size={24} color="#00A385" />
         </View>
         <TouchableOpacity
           onPress={() => handleBiometricAuth()}
@@ -75,10 +93,16 @@ export default function ConfirmPinScreen() {
         </TouchableOpacity>
       </View>
       <Text className="text-center my-2 text-[15px] font-medium">
-        Repeat a Pin code
+        {user?.email}
       </Text>
+      <TouchableOpacity onPress={handleLogout}>
+        <Text className="text-[15px] text-brand-orange-400 text-center">
+          Change Account
+        </Text>
+      </TouchableOpacity>
+
       <Text className="text-center my-6 text-[15px] text-brand-gray-500">
-        enter 5 digit code:
+        {t("repeatPin.description")}
       </Text>
       <PincodeForm
         code={pin}

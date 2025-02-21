@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useRouter } from "expo-router";
 import { Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { useTranslation } from "react-i18next";
 import Ionicons from "@expo/vector-icons/Ionicons";
 
 import { ArrowBack } from "@/components/arrow-back";
@@ -11,6 +12,7 @@ import { pinService } from "@/shared/lib/pin/utils";
 const pinLength = 5;
 
 export default function CreatePinScreen() {
+  const { t } = useTranslation();
   const [pin, setPin] = useState("");
   const router = useRouter();
 
@@ -34,10 +36,10 @@ export default function CreatePinScreen() {
         <View />
       </View>
       <Text className="text-center my-2 text-[15px] font-medium">
-        Create a Pin code
+        {t("createPin.header")}
       </Text>
       <Text className="text-center my-6 text-[15px] text-brand-gray-500">
-        enter 5 digit code:
+        {t("createPin.description")}
       </Text>
       <PincodeForm
         code={pin}

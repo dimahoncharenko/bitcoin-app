@@ -5,8 +5,11 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { Badge } from "@/components/Badge";
 import { badges } from "@/shared/data/badges";
 import { Link } from "expo-router";
+import { useTranslation } from "react-i18next";
 
 export default function WelcomeScreen() {
+  const { t } = useTranslation();
+
   return (
     <SafeAreaView className="flex items-center relative py-4 h-screen">
       <FlatList
@@ -54,14 +57,14 @@ export default function WelcomeScreen() {
           className="text-center text-[15px] font-semibold text-brand-orange-400"
           href="/(auth)"
         >
-          Sign In
+          {t("shared.signIn")}
         </Link>
         <View className="bg-brand-orange-400 w-full min-w-[343px] rounded-xl mb-[6px] mt-5">
           <Link
             className="py-3 text-[15px] text-center text-white font-semibold"
             href="/(auth)/sign-up"
           >
-            Sign Up
+            {t("shared.signUp")}
           </Link>
         </View>
       </View>

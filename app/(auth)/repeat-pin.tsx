@@ -1,4 +1,4 @@
-import { Text, TouchableOpacity, View } from "react-native";
+import { Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { useRouter } from "expo-router";
@@ -6,17 +6,16 @@ import { useState } from "react";
 
 import { ArrowBack } from "@/components/arrow-back";
 import { PincodeForm } from "@/components/pincode-form";
-import { useBiometricAuth } from "@/shared/hooks/useBiometricAuth";
 import { pinService } from "@/shared/lib/pin/utils";
 import { Alert } from "@/components/alert";
+import { useTranslation } from "react-i18next";
 
 const pinLength = 5;
 
 export default function RepeatPinScreen() {
   const [pin, setPin] = useState("");
-
+  const { t } = useTranslation();
   const router = useRouter();
-  const { handleBiometricAuth } = useBiometricAuth();
 
   const handlePinSubmit = async (code: string) => {
     const candidate = await pinService.getPin();
@@ -26,7 +25,11 @@ export default function RepeatPinScreen() {
       router.push("/(app)");
     } else {
       setPin("");
-      Alert({ title: "Invalid PIN", errorMsg: "Please try again.", text: "" });
+      Alert({
+        title: t("repeatPin.errorHead"),
+        errorMsg: t("repeatPin.errorBody"),
+        text: "",
+      });
     }
   };
 
@@ -39,18 +42,13 @@ export default function RepeatPinScreen() {
         <View className="rounded-full bg-brand-green-100 size-12 border border-brand-green-200 flex justify-center items-center">
           <Ionicons name="phone-portrait-outline" size={24} color="#00A385" />
         </View>
-        <TouchableOpacity
-          onPress={() => handleBiometricAuth()}
-          className="rounded-full bg-brand-green-100 size-12 border border-brand-green-200 flex justify-center items-center"
-        >
-          <Ionicons name="finger-print" size={24} color="black" />
-        </TouchableOpacity>
+        <View className="size-12" />
       </View>
       <Text className="text-center my-2 text-[15px] font-medium">
-        Repeat a Pin code
+        {t("repeatPin.header")}
       </Text>
       <Text className="text-center my-6 text-[15px] text-brand-gray-500">
-        enter 5 digit code:
+        {t("repeatPin.description")}
       </Text>
       <PincodeForm
         code={pin}
