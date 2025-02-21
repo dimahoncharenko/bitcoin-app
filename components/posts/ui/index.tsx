@@ -1,24 +1,18 @@
-import { Post as TPost } from "@/shared/lib/posts/utils";
-import { useEffect, useState } from "react";
-import { getPosts, handleFetchPostsError } from "../lib/utils";
-import { Post } from "@/components/post/ui";
 import { View } from "react-native";
+import { useQuery } from "@tanstack/react-query";
+
+import { getPosts } from "../lib/utils";
+import { Post } from "@/components/post/ui";
 
 export const Posts = () => {
-  const [posts, setPosts] = useState<TPost[]>([]);
+  const { data: posts } = useQuery({
+    queryKey: ["posts"],
+    queryFn: async () => {
+      return await getPosts();
+    },
+  });
 
-  useEffect(() => {
-    (async () => {
-      try {
-        const posts = await getPosts();
-        setPosts(posts);
-      } catch (err) {
-        handleFetchPostsError(err);
-      }
-    })();
-  }, []);
-
-  if (!posts.length) return;
+  if (!posts) return;
 
   return (
     <View className="gap-2 mb-48">

@@ -1,8 +1,6 @@
 import { ArrowBack } from "@/components/arrow-back";
 import { BrandButton } from "@/components/brand-button";
-import { CommentBlock } from "@/components/comment-block";
 import { Comments } from "@/components/comments";
-import { commentsService } from "@/shared/lib/comments/utils";
 import { postsService } from "@/shared/lib/posts/utils";
 import { useQuery } from "@tanstack/react-query";
 import { useLocalSearchParams, useRouter } from "expo-router";

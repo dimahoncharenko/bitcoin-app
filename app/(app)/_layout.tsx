@@ -81,6 +81,24 @@ export default function () {
             ),
           }}
         />
+        <Tabs.Screen
+          name="language"
+          options={{
+            // Hide from tab bar
+            tabBarItemStyle: {
+              display: "none",
+            },
+            tabBarLabelStyle: {
+              lineHeight: 12,
+            },
+            tabBarActiveTintColor: "#FA8A34",
+            tabBarInactiveTintColor: "#606773",
+            title: "Profile",
+            tabBarIcon: ({ color }) => (
+              <Feather name="user" size={24} color={color} />
+            ),
+          }}
+        />
       </Tabs>
       <StatusBar style="light" />
     </>
