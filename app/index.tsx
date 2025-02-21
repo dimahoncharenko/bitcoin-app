@@ -46,7 +46,7 @@ export default function WelcomeScreen() {
                     />
                   ))}
                 </View>
-                <Text className="text-center">{item.label}</Text>
+                <Text className="text-center">{t(item.label)}</Text>
               </View>
             )}
           </>

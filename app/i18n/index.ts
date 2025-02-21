@@ -16,7 +16,7 @@ const resources = {
       search: {
         title: "Search",
         placeholder: "Search Products...",
-        name: "Name",
+        name: "Name:",
         id: "ID:",
       },
       shared: {
@@ -68,7 +68,11 @@ const resources = {
         description: "enter 5 digit code:",
         errorHead: "Invalid PIN",
         errorBody: "Please try again.",
+        biometricsNotAvailable: "Biometrics auth not supported",
+        passwordFallback: "Please enter your password",
+        biometricsNotFound: "Biometric record not found",
         biometricsHeader: "Login to Bitcoin App with biometrics",
+        faceIdHeader: "Login to Bitcoin App by face ID",
         biometricsCancel: "Cancel",
         biometricsErrorHead: "Biometrics login failed",
         biometricsErrorBody:
@@ -177,6 +181,10 @@ const resources = {
         description: "أدخل رمزًا من 5 أرقام:",
         errorHead: "رمز PIN غير صالح",
         errorBody: "يرجى المحاولة مرة أخرى.",
+        faceIdHeader: "تسجيل الدخول إلى تطبيق بيتكوين باستخدام معرف الوجه",
+        biometricsNotAvailable: "المصادقة البيومترية غير مدعومة",
+        passwordFallback: "يرجى إدخال كلمة المرور الخاصة بك",
+        biometricsNotFound: "لم يتم العثور على سجل بيومتري",
         biometricsHeader: "تسجيل الدخول إلى تطبيق بيتكوين بالبصمة",
         biometricsCancel: "إلغاء",
         biometricsErrorHead: "فشل تسجيل الدخول بالبصمة",

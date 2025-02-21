@@ -44,8 +44,8 @@ export default function MainScreen() {
             {cards.map((card, index) => (
               <Card
                 key={index}
-                content={card.content}
-                subtext={card.subtext}
+                content={t(card.content)}
+                subtext={t(card.subtext)}
                 classNames={{
                   container: card.containerClassname,
                   subtext: card.subtextClassname,

@@ -27,17 +27,17 @@ export const useBiometricAuth = () => {
 
     if (!isBiometricAvailable)
       return Alert({
-        title: "Please enter your password",
-        errorMsg: "Biometrics auth not supported",
-        text: "OK",
+        title: t("submitPin.passwordFallback"),
+        errorMsg: t("submitPin.biometricsNotAvailable"),
+        text: t("shared.ok"),
       });
 
     const savedBiometrics = await LocalAuthentication.isEnrolledAsync();
     if (!savedBiometrics) {
       return Alert({
-        title: "Biometric record not found",
-        errorMsg: "Please login with your password",
-        text: "OK",
+        title: t("submitPin.biometricsNotFound"),
+        errorMsg: t("submitPin.passwordFallback"),
+        text: t("shared.ok"),
       });
     }
 

@@ -1,12 +1,15 @@
-import i18n from "@/app/i18n";
-import { BrandCheckbox } from "@/components/brand-checkbox";
-import { languages } from "@/shared/data/languages";
 import Fontisto from "@expo/vector-icons/Fontisto";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 import { Text, TouchableOpacity, View } from "react-native";
 
+import i18n from "@/app/i18n";
+import { BrandCheckbox } from "@/components/brand-checkbox";
+import { languages } from "@/shared/data/languages";
+
 export const Languages = () => {
+  const { t } = useTranslation();
   const [selectedLanguage, setSelectedLanguage] = useState(languages[0].code);
 
   const handleSelect = (lang: string) => {
@@ -30,7 +33,7 @@ export const Languages = () => {
           <Fontisto name="world-o" size={24} color="#FA8A34" />
           <View className="flex-row justify-between flex-1">
             <Text className="font-medium text-[15px]/[24px] w-full max-w-16 capitalize">
-              {lang.label}
+              {t(lang.label)}
             </Text>
             <BrandCheckbox
               onChange={() => {}}

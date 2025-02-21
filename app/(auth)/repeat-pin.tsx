@@ -17,6 +17,15 @@ export default function RepeatPinScreen() {
   const { t } = useTranslation();
   const router = useRouter();
 
+  const displayPinError = () => {
+    setPin("");
+    Alert({
+      title: t("repeatPin.errorHead"),
+      errorMsg: t("repeatPin.errorBody"),
+      text: t("shared.ok"),
+    });
+  };
+
   const handlePinSubmit = async (code: string) => {
     const candidate = await pinService.getPin();
     const validated = code === candidate;
@@ -24,12 +33,7 @@ export default function RepeatPinScreen() {
     if (validated) {
       router.push("/(app)");
     } else {
-      setPin("");
-      Alert({
-        title: t("repeatPin.errorHead"),
-        errorMsg: t("repeatPin.errorBody"),
-        text: "",
-      });
+      displayPinError();
     }
   };
 
