@@ -5,8 +5,11 @@ import SimpleLineIcons from "@expo/vector-icons/SimpleLineIcons";
 import { Tabs } from "expo-router";
 import { Platform } from "react-native";
 import { StatusBar } from "expo-status-bar";
+import { useTranslation } from "react-i18next";
 
 export default function () {
+  const { t } = useTranslation();
+
   return (
     <>
       <Tabs
@@ -29,7 +32,7 @@ export default function () {
             },
             tabBarActiveTintColor: "#FA8A34",
             tabBarInactiveTintColor: "#606773",
-            title: "Home",
+            title: t("home.tabbarHome"),
             tabBarIcon: ({ color }) => (
               <MaterialCommunityIcons
                 size={28}
@@ -47,7 +50,7 @@ export default function () {
             },
             tabBarActiveTintColor: "#FA8A34",
             tabBarInactiveTintColor: "#606773",
-            title: "Portfolio",
+            title: t("home.tabbarPortfolio"),
             tabBarIcon: ({ color }) => (
               <SimpleLineIcons name="briefcase" size={24} color={color} />
             ),
@@ -61,7 +64,7 @@ export default function () {
             },
             tabBarActiveTintColor: "#FA8A34",
             tabBarInactiveTintColor: "#606773",
-            title: "Search",
+            title: t("home.tabbarSearch"),
             tabBarIcon: ({ color }) => (
               <Octicons name="search" size={24} color={color} />
             ),
@@ -75,7 +78,7 @@ export default function () {
             },
             tabBarActiveTintColor: "#FA8A34",
             tabBarInactiveTintColor: "#606773",
-            title: "Profile",
+            title: t("home.tabbarProfile"),
             tabBarIcon: ({ color }) => (
               <Feather name="user" size={24} color={color} />
             ),
@@ -93,7 +96,7 @@ export default function () {
             },
             tabBarActiveTintColor: "#FA8A34",
             tabBarInactiveTintColor: "#606773",
-            title: "Profile",
+            title: "",
             tabBarIcon: ({ color }) => (
               <Feather name="user" size={24} color={color} />
             ),

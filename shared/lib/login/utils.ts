@@ -1,14 +1,16 @@
-import { ENV_VARS } from "@/shared/constants/env.const";
-import { mockedAuthenticatedUserCredentials } from "@/shared/data/mocked-user";
 import axios from "axios";
 import * as yup from "yup";
 
+import { ENV_VARS } from "@/shared/constants/env.const";
+import { mockedAuthenticatedUserCredentials } from "@/shared/data/mocked-user";
+import i18n from "../../../app/i18n";
+
 export const loginValidationSchema = yup
   .object({
-    email: yup.string().required("Please enter your email address"),
+    email: yup.string().required(i18n.t("signIn.fields.emailError")),
     password: yup
       .string()
-      .min(6, "Password must be at least 6 characters long")
+      .min(6, i18n.t("signIn.fields.passwordError"))
       .required(),
   })
   .required();

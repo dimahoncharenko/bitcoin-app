@@ -4,11 +4,13 @@ import { Comments } from "@/components/comments";
 import { postsService } from "@/shared/lib/posts/utils";
 import { useQuery } from "@tanstack/react-query";
 import { useLocalSearchParams, useRouter } from "expo-router";
+import { useTranslation } from "react-i18next";
 
 import { ImageBackground, ScrollView, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function PostScreen() {
+  const { t } = useTranslation();
   const { id } = useLocalSearchParams();
   const router = useRouter();
 
@@ -39,19 +41,19 @@ export default function PostScreen() {
         </View>
 
         <Text className="text-[15px]/[16px] text-brand-gray-700 my-2 mx-4 mt-12">
-          About
+          {t("post.aboutSection")}
         </Text>
         <View className="rounded-2xl bg-white p-6 mx-4">
           <Text className="text-[15px]/[32px]">{post.body}</Text>
         </View>
 
         <Text className="text-[15px]/[16px] text-brand-gray-700 my-2 mx-4">
-          Comments
+          {t("post.commentsSection")}
         </Text>
         <Comments postId={id.toString()} />
         <View className=" bg-white py-5">
           <BrandButton className="mb-5" onPress={() => router.back()}>
-            Back
+            {t("post.back")}
           </BrandButton>
         </View>
       </SafeAreaView>

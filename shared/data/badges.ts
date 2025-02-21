@@ -1,3 +1,5 @@
+import i18n from "../../app/i18n";
+
 export const badges = [
   {
     order: 0,
@@ -11,7 +13,7 @@ export const badges = [
       require("../../assets/icons/charity.png"),
       require("../../assets/icons/user.png"),
     ],
-    label: "Lorem ipsum 2",
+    label: i18n.t("welcome.card2"),
   },
   {
     order: 4,
@@ -20,7 +22,7 @@ export const badges = [
       require("../../assets/icons/offices.png"),
       require("../../assets/icons/residential.png"),
     ],
-    label: "Lorem ipsum",
+    label: i18n.t("welcome.card1"),
   },
   {
     order: 2,
@@ -29,7 +31,7 @@ export const badges = [
       require("../../assets/icons/metals.png"),
       require("../../assets/icons/lightning.png"),
     ],
-    label: "Lorem ipsum 4",
+    label: i18n.t("welcome.card4"),
   },
   {
     order: 5,
@@ -39,7 +41,7 @@ export const badges = [
       require("../../assets/icons/vangard.png"),
       require("../../assets/icons/iShares.png"),
     ],
-    label: "Lorem ipsum 3",
+    label: i18n.t("welcome.card3"),
   },
   {
     order: 3,
@@ -48,6 +50,6 @@ export const badges = [
       require("../../assets/icons/bitcoin.png"),
       require("../../assets/icons/tether.png"),
     ],
-    label: "Lorem ipsum 5",
+    label: i18n.t("welcome.card5"),
   },
 ];

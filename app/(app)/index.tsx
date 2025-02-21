@@ -7,8 +7,11 @@ import { Slider } from "@/components/sliders";
 import { Card } from "@/components/card";
 import { cards } from "@/shared/data/cards";
 import { Posts } from "@/components/posts";
+import { useTranslation } from "react-i18next";
 
 export default function MainScreen() {
+  const { t } = useTranslation();
+
   return (
     <ScrollView>
       <SafeAreaView className="relative flex-1">
@@ -16,13 +19,15 @@ export default function MainScreen() {
         <View className="px-4">
           <View className="bg-white flex-row rounded-2xl h-[144px] my-6 p-6">
             <View className="flex-1 gap-1">
-              <Text className="text-[15px]/[18px] font-medium">Test task</Text>
+              <Text className="text-[15px]/[18px] font-medium">
+                {t("home.testTask")}
+              </Text>
               <Text className="text-[13px]/[15px] text-brand-gray-550">
-                Lorem ipsum
+                {t("home.testDescription")}
               </Text>
               <TouchableOpacity className="flex-row items-center gap-11 mb-1 mt-auto">
                 <Text className="text-brand-green-400 font-medium text-[15px]/[24px]">
-                  Go to call
+                  {t("home.toCall")}
                 </Text>
                 <Feather name="chevron-right" size={24} color="#009E81" />
               </TouchableOpacity>
@@ -33,7 +38,7 @@ export default function MainScreen() {
           </View>
 
           <Text className="text-[15px]/[16px] text-brand-gray-700 m-2">
-            Before you start
+            {t("home.beforeStartSection")}
           </Text>
           <Slider>
             {cards.map((card, index) => (
@@ -50,7 +55,7 @@ export default function MainScreen() {
           </Slider>
 
           <Text className="text-[15px]/[16px] text-brand-gray-700 m-2 mt-8">
-            Posts
+            {t("home.postsSection")}
           </Text>
           <Posts />
         </View>

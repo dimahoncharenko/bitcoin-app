@@ -7,6 +7,7 @@ import "react-native-reanimated";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 import "../global.css";
+import "./i18n";
 import AppStateListener from "@/shared/config/app-listener";
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.

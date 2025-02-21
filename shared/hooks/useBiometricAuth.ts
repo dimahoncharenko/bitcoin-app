@@ -3,10 +3,11 @@ import * as LocalAuthentication from "expo-local-authentication";
 import { Alert } from "@/components/alert";
 import { useRouter } from "expo-router";
 import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 
 export const useBiometricAuth = () => {
   const router = useRouter();
-
+  const { t } = useTranslation();
   const [isBiometricSupported, setIsBiometricSupported] = useState(false);
 
   useEffect(() => {
@@ -41,16 +42,16 @@ export const useBiometricAuth = () => {
     }
 
     const biometricAuth = await LocalAuthentication.authenticateAsync({
-      promptMessage: "Login to Bitcoin App with biometrics",
-      cancelLabel: "Cancel",
+      promptMessage: t("submitPin.biometricsHeader"),
+      cancelLabel: t("submitPin.biometricsCancel"),
       disableDeviceFallback: true,
     });
 
     if (!biometricAuth.success) {
       return Alert({
-        title: "Biometric login failed",
-        errorMsg: "Biometrics authentication failed or user's denial",
-        text: "OK",
+        title: t("submitPin.biometricsErrorHead"),
+        errorMsg: t("submitPin.biometricsErrorBody"),
+        text: t("shared.ok"),
       });
     } else {
       router.push("/(app)");

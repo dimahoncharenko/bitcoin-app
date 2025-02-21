@@ -8,9 +8,11 @@ import { ErrorMessage } from "@/components/error-message";
 import { signUpValidationSchema } from "@/shared/lib/sign-up/utils";
 import { ArrowBack } from "@/components/arrow-back";
 import { useRouter } from "expo-router";
+import { useTranslation } from "react-i18next";
 
 export default function SignUpScreen() {
   const router = useRouter();
+  const { t } = useTranslation();
 
   const {
     control,
@@ -45,10 +47,10 @@ export default function SignUpScreen() {
           </View>
           <View>
             <Text className="text-brand-black text-[15px] font-semibold">
-              Sign up
+              {t("signUp.header")}
             </Text>
             <Text className="text-[15px] text-brand-gray-500">
-              Personal Account
+              {t("signUp.account")}
             </Text>
           </View>
         </View>
@@ -63,11 +65,11 @@ export default function SignUpScreen() {
             render={({ field: { onChange, onBlur, value } }) => (
               <View className="px-4 relative">
                 <Text className="mb-2 ml-4 text-[15px] text-brand-gray-500">
-                  Name
+                  {t("signUp.fields.name")}
                 </Text>
                 <TextInput
                   className="border rounded-2xl h-14 px-4 text-brand-black text-[15px]/[1rem] border-brand-gray-300"
-                  placeholder="John Doe"
+                  placeholder={t("signUp.fields.namePlaceholder")}
                   onBlur={onBlur}
                   onChangeText={onChange}
                   value={value}
@@ -89,7 +91,7 @@ export default function SignUpScreen() {
             render={({ field: { onChange, onBlur, value } }) => (
               <View className="py-6 px-4 relative">
                 <Text className="mb-2 ml-4 text-[15px] text-brand-gray-500">
-                  E-mail
+                  {t("signUp.fields.email")}
                 </Text>
                 <TextInput
                   className="border rounded-2xl h-14 px-4 text-brand-black text-[15px]/[1rem] border-brand-gray-300"
@@ -119,7 +121,7 @@ export default function SignUpScreen() {
             render={({ field: { onChange, onBlur, value } }) => (
               <View className="px-4 relative">
                 <Text className="mb-2 ml-4 text-[15px] text-brand-gray-500">
-                  Password
+                  {t("signUp.fields.password")}
                 </Text>
                 <TextInput
                   className="border rounded-2xl px-4 h-14 font-black text-brand-gray-500 text-2xl/[1rem] border-brand-gray-300"
@@ -146,7 +148,7 @@ export default function SignUpScreen() {
           className="mt-auto bg-brand-orange-400 mx-4 rounded-2xl"
         >
           <Text className="text-center text-white text-[15px] font-semibold py-3">
-            Continue
+            {t("shared.submit")}
           </Text>
         </TouchableOpacity>
       </View>
