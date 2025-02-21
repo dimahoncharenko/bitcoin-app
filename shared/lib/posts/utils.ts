@@ -12,6 +12,11 @@ class PostsService {
     const response = await axios.get(ENV_VARS.DATA_API + "/posts");
     return response.data;
   }
+
+  async getPostById(id: string): Promise<Post> {
+    const response = await axios.get(`${ENV_VARS.DATA_API}/posts/${id}`);
+    return response.data;
+  }
 }
 
 export const postsService = new PostsService();

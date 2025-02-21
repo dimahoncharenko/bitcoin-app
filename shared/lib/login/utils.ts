@@ -23,7 +23,6 @@ export const login = async (creds: LoginCredentials) => {
     username: creds.email,
     password: creds.password,
   });
-  console.log("SSSSSSSSs");
 
   return res.data;
 };

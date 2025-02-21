@@ -58,6 +58,7 @@ export default function LoginScreen() {
     <SafeAreaView className="relative flex-1">
       <View className="h-1/6 flex justify-center">
         <ArrowBack />
+        <Link href="/(app)/profile">Profile</Link>
       </View>
       <Image
         className="absolute top-0 -z-10"
