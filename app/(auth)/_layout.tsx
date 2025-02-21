@@ -17,7 +17,7 @@ export default function () {
         }}
       />
       <Stack.Screen
-        name="repeat-pin"
+        name="confirm-pin"
         options={{
           headerShown: false,
         }}

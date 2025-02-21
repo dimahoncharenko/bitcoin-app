@@ -2,7 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 
 import { ENV_VARS } from "../constants/env.const";
-import { tokenService } from "../lib/keychain/utils";
+import { tokenService } from "../lib/token/utils";
 
 export const useCurrentUser = () => {
   const [user, setUser] = useState<any>(null);
@@ -20,7 +20,8 @@ export const useCurrentUser = () => {
           withCredentials: true,
         });
 
-        console.log("USER: ", res);
+        console.log("USER: ", res.data);
+        setUser(res.data);
       } catch (err) {
         console.error(err);
       }

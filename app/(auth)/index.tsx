@@ -15,7 +15,8 @@ import {
   login,
   loginValidationSchema,
 } from "@/shared/lib/login/utils";
-import { tokenService } from "@/shared/lib/keychain/utils";
+import { tokenService } from "@/shared/lib/token/utils";
+import { checkIsTherePin } from "@/shared/lib/pin/utils";
 
 type FormValues = {
   email: string;
@@ -42,7 +43,9 @@ export default function LoginScreen() {
     try {
       const res = await login(values);
       tokenService.saveToken(res.accessToken);
-      router.push("/create-pin");
+      const isTherePin = await checkIsTherePin();
+
+      router.push(isTherePin ? "/(app)" : "/confirm-pin");
     } catch (err) {
       const isUsernameCorrect = checkUsername(values.email);
 

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { FlatList, View } from "react-native";
 
 import { BrandButton } from "@/components/brand-button";
@@ -9,11 +9,16 @@ import { Key } from "./key";
 type Props = {
   pinLength?: number;
   handleSubmit: (code: string) => void;
+  setCode: React.Dispatch<React.SetStateAction<string>>;
+  code: string;
 };
 
-export const PincodeForm = ({ pinLength = 4, handleSubmit }: Props) => {
-  const [code, setCode] = useState("");
-
+export const PincodeForm = ({
+  pinLength = 4,
+  handleSubmit,
+  code,
+  setCode,
+}: Props) => {
   const handleChangePin = (key: Keys) => {
     if (isCodeFull(code, key, pinLength)) return;
     if (isClearTyped(key)) {
