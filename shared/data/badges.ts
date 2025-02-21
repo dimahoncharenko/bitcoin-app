@@ -1,5 +1,3 @@
-import i18n from "../../app/i18n";
-
 export const badges = [
   {
     order: 0,
@@ -13,7 +11,7 @@ export const badges = [
       require("../../assets/icons/charity.png"),
       require("../../assets/icons/user.png"),
     ],
-    label: i18n.t("welcome.card2"),
+    label: "welcome.card2",
   },
   {
     order: 4,
@@ -22,7 +20,7 @@ export const badges = [
       require("../../assets/icons/offices.png"),
       require("../../assets/icons/residential.png"),
     ],
-    label: i18n.t("welcome.card1"),
+    label: "welcome.card1",
   },
   {
     order: 2,
@@ -31,7 +29,7 @@ export const badges = [
       require("../../assets/icons/metals.png"),
       require("../../assets/icons/lightning.png"),
     ],
-    label: i18n.t("welcome.card4"),
+    label: "welcome.card4",
   },
   {
     order: 5,
@@ -41,7 +39,7 @@ export const badges = [
       require("../../assets/icons/vangard.png"),
       require("../../assets/icons/iShares.png"),
     ],
-    label: i18n.t("welcome.card3"),
+    label: "welcome.card3",
   },
   {
     order: 3,
@@ -50,6 +48,6 @@ export const badges = [
       require("../../assets/icons/bitcoin.png"),
       require("../../assets/icons/tether.png"),
     ],
-    label: i18n.t("welcome.card5"),
+    label: "welcome.card5",
   },
 ];

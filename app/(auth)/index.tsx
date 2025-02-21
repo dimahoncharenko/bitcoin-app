@@ -2,10 +2,11 @@ import Feather from "@expo/vector-icons/Feather";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Controller, useForm } from "react-hook-form";
 import { Image, TextInput, TouchableOpacity } from "react-native";
-import { View } from "react-native";
-import { Text } from "react-native";
+import { View, Text } from "react-native";
 import { Link, useRouter } from "expo-router";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { useTranslation } from "react-i18next";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 import { ArrowBack } from "@/components/arrow-back";
 import { ErrorMessage } from "@/components/error-message";
@@ -17,8 +18,6 @@ import {
 } from "@/shared/lib/login/utils";
 import { tokenService } from "@/shared/lib/token/utils";
 import { checkIsTherePin } from "@/shared/lib/pin/utils";
-import { useTranslation } from "react-i18next";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 
 type FormValues = {
   email: string;
@@ -42,23 +41,35 @@ export default function LoginScreen() {
     },
   });
 
+  const saveSession = (token: string, email: string) => {
+    tokenService.saveToken(token);
+    AsyncStorage.setItem("user-email", email);
+  };
+
+  const redirectToAppOrPinconfirm = async () => {
+    const isTherePin = await checkIsTherePin();
+    router.push(isTherePin ? "/(app)" : "/confirm-pin");
+  };
+
+  const handleError = (err: unknown, values: FormValues) => {
+    const isUsernameCorrect = checkUsername(values.email);
+
+    if (!isUsernameCorrect) {
+      setError("email", { message: "There is no such user!" });
+    } else if (isUsernameCorrect && !checkUserPassword(values.password)) {
+      setError("password", { message: "Incorrect password!" });
+    }
+
+    console.error(err);
+  };
+
   const submit = async (values: FormValues) => {
     try {
       const res = await login(values);
-      tokenService.saveToken(res.accessToken);
-      const isTherePin = await checkIsTherePin();
-
-      AsyncStorage.setItem("user-email", values.email);
-
-      router.push(isTherePin ? "/(app)" : "/confirm-pin");
+      saveSession(res.accessToken, values.email);
+      await redirectToAppOrPinconfirm();
     } catch (err) {
-      const isUsernameCorrect = checkUsername(values.email);
-
-      if (!isUsernameCorrect) {
-        setError("email", { message: "There is no such user!" });
-      } else if (isUsernameCorrect && !checkUserPassword(values.password)) {
-        setError("password", { message: "Incorrect password!" });
-      }
+      handleError(err, values);
     }
   };
 
