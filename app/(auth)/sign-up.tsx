@@ -7,8 +7,11 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { ErrorMessage } from "@/components/error-message";
 import { signUpValidationSchema } from "@/shared/lib/sign-up/utils";
 import { ArrowBack } from "@/components/arrow-back";
+import { useRouter } from "expo-router";
 
 export default function SignUpScreen() {
+  const router = useRouter();
+
   const {
     control,
     handleSubmit,
@@ -23,7 +26,7 @@ export default function SignUpScreen() {
   });
 
   const submit = () => {
-    console.log("Submitted!");
+    router.push("/create-pin");
   };
 
   return (

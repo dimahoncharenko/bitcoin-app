@@ -7,6 +7,7 @@ import "react-native-reanimated";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 import "../global.css";
+import AppStateListener from "@/shared/config/app-listener";
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
@@ -48,6 +49,7 @@ export default function RootLayout() {
         <Stack.Screen name="+not-found" />
       </Stack>
       <StatusBar style="dark" backgroundColor="transparent" />
+      <AppStateListener />
     </QueryClientProvider>
   );
 }

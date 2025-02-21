@@ -6,9 +6,15 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { useRouter } from "expo-router";
 
 import { ArrowBack } from "@/components/arrow-back";
+import { tokenService } from "@/shared/lib/token/utils";
 
 export default function ProfileScreen() {
   const router = useRouter();
+
+  const logout = async () => {
+    await tokenService.deleteToken();
+    router.push("/(auth)");
+  };
 
   return (
     <SafeAreaView className="bg-white flex-1">
@@ -39,7 +45,10 @@ export default function ProfileScreen() {
             <Text className="m-2">Other</Text>
             <View className="border items-center gap-2 border-brand-gray-300 p-5 rounded-2xl flex-row">
               <Ionicons name="log-out-outline" size={24} color="#FA8A34" />
-              <TouchableOpacity className="flex-row flex-1 justify-between">
+              <TouchableOpacity
+                className="flex-row flex-1 justify-between"
+                onPress={logout}
+              >
                 <Text className="font-medium text-[15px]/[24px]">Log Out</Text>
                 <Feather name="chevron-right" size={24} color="#C1C4CB" />
               </TouchableOpacity>
