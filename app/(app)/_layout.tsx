@@ -2,13 +2,13 @@ import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import Octicons from "@expo/vector-icons/Octicons";
 import Feather from "@expo/vector-icons/Feather";
 import SimpleLineIcons from "@expo/vector-icons/SimpleLineIcons";
-import { Stack, Tabs } from "expo-router";
+import { Tabs } from "expo-router";
 import { Platform } from "react-native";
 import { StatusBar } from "expo-status-bar";
 
 export default function () {
   return (
-    <Stack>
+    <>
       <Tabs
         screenOptions={{
           headerShown: false,
@@ -82,7 +82,7 @@ export default function () {
           }}
         />
       </Tabs>
-      <StatusBar style="light" animated />
-    </Stack>
+      <StatusBar style="light" />
+    </>
   );
 }
