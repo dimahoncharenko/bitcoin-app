@@ -1,9 +1,8 @@
-import axios from "axios";
 import * as yup from "yup";
 
-import { ENV_VARS } from "@/shared/constants/env.const";
 import { mockedAuthenticatedUserCredentials } from "@/shared/data/mocked-user";
 import i18n from "../../../app/i18n";
+import { axiosAuthInstance } from "@/shared/config/axios";
 
 export const loginValidationSchema = yup
   .object({
@@ -21,7 +20,7 @@ export type LoginCredentials = {
 };
 
 export const login = async (creds: LoginCredentials) => {
-  const res = await axios.post(ENV_VARS.AUTH_API + "/login", {
+  const res = await axiosAuthInstance.post("/login", {
     username: creds.email,
     password: creds.password,
   });

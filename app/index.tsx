@@ -1,11 +1,11 @@
+import { SafeAreaView } from "react-native-safe-area-context";
 import { FlatList, Image, Text, View } from "react-native";
+import { useTranslation } from "react-i18next";
+import { Link } from "expo-router";
 import clsx from "clsx";
 
-import { SafeAreaView } from "react-native-safe-area-context";
 import { Badge } from "@/components/Badge";
 import { badges } from "@/shared/data/badges";
-import { Link } from "expo-router";
-import { useTranslation } from "react-i18next";
 
 export default function WelcomeScreen() {
   const { t } = useTranslation();

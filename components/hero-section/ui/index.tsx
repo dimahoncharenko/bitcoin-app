@@ -24,7 +24,7 @@ export const HeroSection = () => {
         {t("home.username")}
       </Text>
       <Text className="text-[28px]/[32px] mt-2 font-bold text-white">
-        {user?.name || t("home.usernameFallback")}
+        {user?.username || t("home.usernameFallback")}
       </Text>
     </LinearGradient>
   );

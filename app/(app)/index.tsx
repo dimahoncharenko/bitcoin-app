@@ -1,13 +1,19 @@
-import { ScrollView, Text, TouchableOpacity, View } from "react-native";
+import {
+  ScrollView,
+  Text,
+  TouchableOpacity,
+  View,
+  VirtualizedList,
+} from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import Feather from "@expo/vector-icons/Feather";
+import { useTranslation } from "react-i18next";
 
 import { HeroSection } from "@/components/hero-section";
 import { Slider } from "@/components/sliders";
 import { Card } from "@/components/card";
 import { cards } from "@/shared/data/cards";
 import { Posts } from "@/components/posts";
-import { useTranslation } from "react-i18next";
 
 export default function MainScreen() {
   const { t } = useTranslation();

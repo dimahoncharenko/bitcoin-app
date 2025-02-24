@@ -40,7 +40,7 @@ export default function ConfirmPinScreen() {
 
   const letUserGo = () => {
     allowedToLeave.current = true;
-    router.back();
+    router.replace("/(app)");
   };
 
   const displayPinError = () => {
@@ -67,7 +67,7 @@ export default function ConfirmPinScreen() {
     try {
       allowedToLeave.current = true;
       await tokenService.deleteToken();
-      router.replace("/");
+      router.replace("/(auth)");
     } catch (error) {
       console.error("Logout error:", error);
     }

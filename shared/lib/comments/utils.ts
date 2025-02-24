@@ -1,5 +1,4 @@
-import { ENV_VARS } from "@/shared/constants/env.const";
-import axios from "axios";
+import { axiosDataInstance } from "@/shared/config/axios";
 
 export type Comment = {
   postId: number;
@@ -11,9 +10,7 @@ export type Comment = {
 
 class CommentsService {
   async getCommentsByPostId(postId: string): Promise<Comment[]> {
-    const response = await axios.get(
-      ENV_VARS.DATA_API + `/comments?postId=${postId}`
-    );
+    const response = await axiosDataInstance.get(`/comments?postId=${postId}`);
     return response.data;
   }
 }

@@ -13,7 +13,6 @@ export const Posts = () => {
   });
 
   if (!posts) return;
-
   return (
     <View className="gap-2 mb-48">
       {posts.map((post) => (

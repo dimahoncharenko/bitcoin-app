@@ -1,9 +1,11 @@
+import { axiosDataInstance } from "@/shared/config/axios";
 import { ENV_VARS } from "@/shared/constants/env.const";
 import { Post } from "@/shared/lib/posts/utils";
-import axios from "axios";
 
 export const getPosts = async () => {
-  const response = await axios.get<Post[]>(ENV_VARS.DATA_API + "/posts");
+  const response = await axiosDataInstance.get<Post[]>(
+    ENV_VARS.DATA_API + "/posts"
+  );
   return response.data;
 };
 
