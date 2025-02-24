@@ -8,13 +8,14 @@ export default function SearchScreen() {
   const { t } = useTranslation();
 
   return (
-    <ScrollView>
-      <SafeAreaView className="p-4">
-        <Text className="mb-4 text-[22px]/[32px] font-semibold">
-          {t("search.title")}
-        </Text>
-        <PostsNamesList />
-      </SafeAreaView>
-    </ScrollView>
+    // <ScrollView>
+    <SafeAreaView className="p-4">
+      <Text className="mb-4 text-[22px]/[32px] font-semibold">
+        {t("search.title")}
+      </Text>
+      <PostsNamesList />
+    </SafeAreaView>
   );
+
+  /* </ScrollView> */
 }

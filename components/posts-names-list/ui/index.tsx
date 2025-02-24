@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { Text, View } from "react-native";
+import { Text, View, VirtualizedList } from "react-native";
 
 import { getPosts } from "@/components/posts/lib/utils";
 import { SearchField } from "./search-field";
@@ -42,17 +42,37 @@ export const PostsNamesList = () => {
 
       <View className="gap-2 mt-4">
         <Filter data={posts} criteria={criteria}>
-          {(filtered) =>
-            filtered.map((post) => (
-              <View key={post.id} className="bg-white px-4 py-6 rounded-2xl">
-                <Text className="text-[15px]/[24px] text-brand-black font-medium">
-                  {t("search.id")} {post.id}
-                </Text>
-                <Text className="text-brand-gray-550 text-[13px]/[16px]">
-                  {t("search.name")} {post.title}
-                </Text>
-              </View>
-            ))
+          {
+            (filtered) => (
+              <VirtualizedList
+                data={filtered}
+                initialNumToRender={8}
+                className="mb-56"
+                renderItem={({ item: post }: { item: Post }) => (
+                  <View className="bg-white px-4 py-6 rounded-2xl odd:my-2">
+                    <Text className="text-[15px]/[24px] text-brand-black font-medium">
+                      {t("search.id")} {post.id}
+                    </Text>
+                    <Text className="text-brand-gray-550 text-[13px]/[16px]">
+                      {t("search.name")} {post.title}
+                    </Text>
+                  </View>
+                )}
+                getItem={(data, index) => data[index]}
+                getItemCount={() => filtered.length}
+                keyExtractor={(item) => item.id.toString()}
+              />
+            )
+            // filtered.map((post) => (
+            // <View key={post.id} className="bg-white px-4 py-6 rounded-2xl">
+            //   <Text className="text-[15px]/[24px] text-brand-black font-medium">
+            //     {t("search.id")} {post.id}
+            //   </Text>
+            //   <Text className="text-brand-gray-550 text-[13px]/[16px]">
+            //     {t("search.name")} {post.title}
+            //   </Text>
+            // </View>
+            // ))
           }
         </Filter>
       </View>

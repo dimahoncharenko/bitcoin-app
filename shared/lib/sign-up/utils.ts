@@ -1,4 +1,5 @@
 import * as yup from "yup";
+
 import i18n from "../../../app/i18n";
 
 export const signUpValidationSchema = yup

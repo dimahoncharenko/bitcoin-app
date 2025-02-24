@@ -1,9 +1,9 @@
 import * as LocalAuthentication from "expo-local-authentication";
-
-import { Alert } from "@/components/alert";
 import { useRouter } from "expo-router";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
+
+import { Alert } from "@/components/alert";
 
 export const useBiometricAuth = () => {
   const router = useRouter();
@@ -23,9 +23,7 @@ export const useBiometricAuth = () => {
   }, []);
 
   const handleBiometricAuth = async () => {
-    const isBiometricAvailable = await LocalAuthentication.hasHardwareAsync();
-
-    if (!isBiometricAvailable)
+    if (!isBiometricSupported)
       return Alert({
         title: t("submitPin.passwordFallback"),
         errorMsg: t("submitPin.biometricsNotAvailable"),
